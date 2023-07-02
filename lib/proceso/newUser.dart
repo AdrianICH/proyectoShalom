@@ -131,7 +131,7 @@ class insertarUsuario {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                          title: Text('Error'),
+                                          title: Text('AVISO!'),
                                           content: Text(
                                               'El usuario no se ha podido agregar.'),
                                           actions: [
