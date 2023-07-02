@@ -18,7 +18,7 @@ class mostrarUsuario {
           return Column(
             children: [
               AppBar(
-                title: Text("Bienvenido"),
+                title: Text("Bienvenido/a"),
               ),
               Center(
                 // Texto de bienvenida
