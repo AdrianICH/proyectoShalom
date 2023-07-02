@@ -25,7 +25,7 @@ class mostrarUsuario {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    "Bienvenido a Shalom, ${tipo} - ${control.consulta![0].NOMBRE}!\nEste eres tú!",
+                    "Bienvenido/a a Shalom, ${tipo} - ${control.consulta![0].NOMBRE}!\nMira, eres tú 👇!",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
