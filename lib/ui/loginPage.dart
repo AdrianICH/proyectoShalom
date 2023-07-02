@@ -11,6 +11,7 @@ class Login extends StatelessWidget {
         primarySwatch: Colors.indigo,
       ),
       home: const MyLoginPage(title: 'Home Page Shalom'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
