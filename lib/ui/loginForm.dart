@@ -74,9 +74,22 @@ class LoginForm {
                     consultaUsuario(
                             userController.text, passwordController.text)
                         .then((respuesta) {
-                      control.cargarUsuario(respuesta);
-                      mostrarUsuario().mostarDatosUsuario(context);
+                      if (respuesta.isEmpty) {
+                        // Si la respuesta es una lista vacía,
+                        // significa que el usuario no existe o la contrasena está mal
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Usuario y/o contrasena incorrectos'),
+                          ),
+                        );
+                      } else {
+                        // Si no, significa que se ha iniciado sesion
+                        // y se mostrará la informacion personal del usuario
+                        control.cargarUsuario(respuesta);
+                        mostrarUsuario().mostarDatosUsuario(context);
+                      }
                     });
+                    // Se limpian los campos usuario y contrasena
                     userController.clear();
                     passwordController.clear();
                   } else {
