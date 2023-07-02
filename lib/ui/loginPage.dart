@@ -44,10 +44,20 @@ class _MyLoginPageState extends State<MyLoginPage> {
             children: [
               Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Image.asset("header-logo-custom1.png"),
-                  ) // Este es el logo de la pagina
+                  Container(
+                    // Contenedor dinamico que se adapta al tamaño de la pantalla
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: 80,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Image.asset(
+                        "header-logo-custom1.png",
+                        alignment: Alignment.centerLeft,
+                        // Ajusta el tamaño de la imagen para que quepa dentro de la `Row`
+                        fit: BoxFit.scaleDown,
+                      ),
+                    ),
+                  )
                 ],
               ),
               // Añado un divider o separador
