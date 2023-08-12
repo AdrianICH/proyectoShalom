@@ -1,6 +1,6 @@
 # principal_shalom
 
-A new Flutter project.
+Un proyecto en Flutter para la Unidad Educativa Shalom
 
 ## Getting Started
 
