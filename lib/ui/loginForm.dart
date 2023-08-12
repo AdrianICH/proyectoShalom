@@ -86,7 +86,7 @@ class LoginForm {
                         // Si no, significa que se ha iniciado sesion
                         // y se mostrará la informacion personal del usuario
                         control.cargarUsuario(respuesta);
-                        mostrarUsuario().mostarDatosUsuario(context);
+                        MostrarUsuario().mostarDatosUsuario(context);
                       }
                     });
                     // Se limpian los campos usuario y contrasena
@@ -113,7 +113,7 @@ class LoginForm {
               // Boton para crear un nuevo usuario
               child: ElevatedButton(
                 onPressed: () {
-                  insertarUsuario().mostrarFormulario(context);
+                  InsertarUsuario().mostrarFormulario(context);
                 },
                 child: const Text(
                   'Crear nuevo usuario',

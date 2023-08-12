@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/controladorGeneral.dart';
 
-class mostrarUsuario {
+class MostrarUsuario {
   ControlPersonas control = Get.find();
 
   void mostarDatosUsuario(BuildContext context) {

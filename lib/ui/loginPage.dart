@@ -63,7 +63,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
               ),
               // Añado un divider o separador
               const Divider(color: Colors.black),
-              loginBox(),
+              LoginBox(),
               const SizedBox(height: 30), // Espacio vertical adicional
               const Text(
                 "Centro Educativo Shalom 2023\nTodos los derechos reservados",

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'loginForm.dart';
 
-class loginBox extends StatefulWidget {
-  const loginBox({super.key});
+class LoginBox extends StatefulWidget {
+  const LoginBox({super.key});
 
   @override
-  State<loginBox> createState() => _loginBoxState();
+  State<LoginBox> createState() => _LoginBoxState();
 }
 
-class _loginBoxState extends State<loginBox> {
+class _LoginBoxState extends State<LoginBox> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

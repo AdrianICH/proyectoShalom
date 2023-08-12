@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:principal_shalom/controllers/controladorGeneral.dart';
 import '../api/insertarPersona.dart';
 
-class insertarUsuario {
+class InsertarUsuario {
   // Controladores para cada campo dentro del formulario
   final txtuser = TextEditingController();
   final txtpssw = TextEditingController();
