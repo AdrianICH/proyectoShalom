@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:principal_shalom/controllers/controladorGeneral.dart';
-import 'ui/loginPage.dart';
+import 'package:principal_shalom/controllers/controlador_general.dart';
+import 'ui/login_page.dart';
 
 void main() {
   Get.put(ControlPersonas());

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:principal_shalom/api/consultaUsuario.dart';
-import 'package:principal_shalom/api/nuevoAcceso.dart';
-import 'package:principal_shalom/proceso/modalLoginUsuario.dart';
-import 'package:principal_shalom/proceso/newUser.dart';
-import '../controllers/controladorGeneral.dart';
+import 'package:principal_shalom/api/consulta_usuario.dart';
+import 'package:principal_shalom/api/nuevo_acceso.dart';
+import 'package:principal_shalom/proceso/modal_login_usuario.dart';
+import 'package:principal_shalom/proceso/new_user.dart';
+import '../controllers/controlador_general.dart';
 
 class LoginForm {
   // Comunicación con el controlador general

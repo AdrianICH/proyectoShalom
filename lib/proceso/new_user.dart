@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:principal_shalom/controllers/controladorGeneral.dart';
-import '../api/insertarPersona.dart';
+import 'package:principal_shalom/controllers/controlador_general.dart';
+import '../api/insertar_persona.dart';
 
 class InsertarUsuario {
   // Controladores para cada campo dentro del formulario

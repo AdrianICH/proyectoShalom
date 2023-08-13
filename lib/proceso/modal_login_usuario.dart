@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/controladorGeneral.dart';
+import '../controllers/controlador_general.dart';
 
 class MostrarUsuario {
   ControlPersonas control = Get.find();

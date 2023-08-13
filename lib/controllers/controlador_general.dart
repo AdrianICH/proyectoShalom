@@ -1,6 +1,6 @@
-import 'package:principal_shalom/api/insertarPersona.dart';
+import 'package:principal_shalom/api/insertar_persona.dart';
 import 'package:get/get.dart';
-import '../api/consultaUsuario.dart';
+import '../api/consulta_usuario.dart';
 
 class ControlPersonas extends GetxController {
   final Rxn<List<usuario>> _datos = Rxn<List<usuario>>();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:principal_shalom/ui/loginBox.dart';
+import 'package:principal_shalom/ui/login_box.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
