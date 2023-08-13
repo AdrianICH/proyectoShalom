@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:principal_shalom/api/consultaUsuario.dart';
+import 'package:principal_shalom/api/nuevoAcceso.dart';
 import 'package:principal_shalom/proceso/modalLoginUsuario.dart';
 import 'package:principal_shalom/proceso/newUser.dart';
 import '../controllers/controladorGeneral.dart';
@@ -86,6 +88,11 @@ class LoginForm {
                         // Si no, significa que se ha iniciado sesion
                         // y se mostrará la informacion personal del usuario
                         control.cargarUsuario(respuesta);
+                        nuevoAcceso(
+                            control.consulta![0].IDUSUARIO,
+                            DateFormat.Hms().format(DateTime.now()),
+                            DateFormat.yMd().format(DateTime.now()),
+                            "1");
                         MostrarUsuario().mostarDatosUsuario(context);
                       }
                     });
