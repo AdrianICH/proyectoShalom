@@ -18,7 +18,7 @@ void mostrarLoginAdmin(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-            title: Text(
+            title: const Text(
                 'Necesita acceder como Administrador para crear un nuevo usuario'),
             content: Container(
               width: MediaQuery.of(context).size.width * 0.75,
@@ -153,7 +153,7 @@ void mostrarLoginAdmin(BuildContext context) {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('Cerrar'),
+                child: const Text('Cerrar'),
               ),
             ]);
       });
