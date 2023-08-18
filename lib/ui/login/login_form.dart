@@ -5,7 +5,7 @@ import 'package:principal_shalom/api/consulta_usuario.dart';
 import 'package:principal_shalom/api/nuevo_acceso.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
 import 'package:principal_shalom/proceso/modal_bienvenida_usuario.dart';
-import 'package:principal_shalom/proceso/new_user.dart';
+import 'package:principal_shalom/ui/login/admin/admin_access.dart';
 
 class LoginForm {
   // Comunicación con el controlador general
@@ -120,10 +120,11 @@ class LoginForm {
               // Boton para crear un nuevo usuario
               child: ElevatedButton(
                 onPressed: () {
-                  InsertarUsuario().mostrarFormulario(context);
+                  mostrarLoginAdmin(context);
                 },
                 child: const Text(
-                  'Crear nuevo usuario',
+                  'Crear nuevo usuario\n(Administrador)',
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15),
                 ),
               ),
