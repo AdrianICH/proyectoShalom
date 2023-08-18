@@ -13,7 +13,7 @@ final _formKey = GlobalKey<FormState>();
 TextEditingController userController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 
-void mostrarLogin(BuildContext context) {
+void mostrarLoginAdmin(BuildContext context) {
   showDialog(
       context: context,
       builder: (BuildContext context) {
