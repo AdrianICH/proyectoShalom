@@ -15,6 +15,8 @@ class InsertarUsuario {
 
   void mostrarFormulario(BuildContext context) {
     txttipo.text = "1";
+    final mainContext = context; // Almacenar el contexto principal
+
     showModalBottomSheet(
         isScrollControlled: true,
         context: context,
@@ -109,7 +111,8 @@ class InsertarUsuario {
                                   ControlUsuarios CC = Get.find();
                                   CC.guardarUsuario(respuesta);
                                   showDialog(
-                                      context: context,
+                                      context:
+                                          mainContext, // Usar el contexto principal aquí
                                       builder: (BuildContext context) {
                                         return AlertDialog(
                                             title: Text('Usuario agregado'),
@@ -125,10 +128,12 @@ class InsertarUsuario {
                                             ]);
                                       });
                                 });
+                                Navigator.pop(mainContext);
                                 Navigator.pop(context);
                               } else {
                                 showDialog(
-                                    context: context,
+                                    context:
+                                        mainContext, // Usar el contexto principal aquí
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                           title: Text('AVISO!'),
