@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/controlador_general.dart';
 
-class MostrarUsuario {
-  ControlPersonas control = Get.find();
+class MostrarBienvenida {
+  ControlUsuarios control = Get.find();
 
   void mostarDatosUsuario(BuildContext context) {
     String tipo;
@@ -18,7 +18,7 @@ class MostrarUsuario {
           return Column(
             children: [
               AppBar(
-                title: Text("Bienvenido/a"),
+                title: const Text("Bienvenido/a"),
               ),
               Center(
                 // Texto de bienvenida
@@ -26,7 +26,7 @@ class MostrarUsuario {
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
                     "Bienvenido/a a Shalom, ${tipo} - ${control.consulta![0].NOMBRE}!\nMira, eres tú 👇!",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
               ),
