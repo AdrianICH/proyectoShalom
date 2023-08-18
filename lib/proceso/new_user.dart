@@ -106,7 +106,7 @@ class InsertarUsuario {
                                 insertarPersona(txtuser.text, txtpssw.text,
                                         txtname.text, txtid.text, txttipo.text)
                                     .then((respuesta) {
-                                  ControlPersonas CC = Get.find();
+                                  ControlUsuarios CC = Get.find();
                                   CC.guardarUsuario(respuesta);
                                   showDialog(
                                       context: context,

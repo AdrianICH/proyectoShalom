@@ -2,7 +2,8 @@ import 'package:principal_shalom/api/insertar_persona.dart';
 import 'package:get/get.dart';
 import '../api/consulta_usuario.dart';
 
-class ControlPersonas extends GetxController {
+class ControlUsuarios extends GetxController {
+  //Registrar Nuevo Usuario datos
   final Rxn<List<usuario>> _datos = Rxn<List<usuario>>();
 
   void guardarUsuario(List<usuario> X) {
