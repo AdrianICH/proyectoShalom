@@ -119,7 +119,7 @@ void mostrarLoginAdmin(BuildContext context) {
                                             .showSnackBar(
                                           const SnackBar(
                                             content: Text(
-                                                'Usuario no Administrador'),
+                                                'El usuario no es Administrador'),
                                           ),
                                         );
                                         Navigator.pop(context);
@@ -149,12 +149,14 @@ void mostrarLoginAdmin(BuildContext context) {
                   )),
             ),
             actions: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Cerrar'),
-              ),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Cerrar'),
+                ),
+              )
             ]);
       });
 }
