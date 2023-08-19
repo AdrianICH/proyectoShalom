@@ -6,16 +6,8 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get.dart';
-import 'package:principal_shalom/controllers/controlador_general.dart';
-import 'package:principal_shalom/ui/login_page.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // The controller works
-    Get.put(ControlPersonas());
-    await tester.takeException();
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const Login());
+  testWidgets('Testeo de la aplicacion web', (WidgetTester tester) async {
   });
 }

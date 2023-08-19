@@ -2,31 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/controlador_general.dart';
 
-class MostrarUsuario {
-  ControlPersonas control = Get.find();
+class MostrarBienvenida {
+  ControlUsuarios control = Get.find();
 
   void mostarDatosUsuario(BuildContext context) {
-    String tipo;
-    if (control.consulta![0].TIPO == "1") {
-      tipo = "Estudiante";
-    } else {
-      tipo = "Profesor";
-    }
+    List tipo = ["Estudiante", "Profesor", "Administrador"];
+
     showModalBottomSheet(
         context: context,
         builder: (BuildContext c2) {
           return Column(
             children: [
               AppBar(
-                title: Text("Bienvenido/a"),
+                title: const Text("Bienvenido/a"),
               ),
               Center(
                 // Texto de bienvenida
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    "Bienvenido/a a Shalom, ${tipo} - ${control.consulta![0].NOMBRE}!\nMira, eres tú 👇!",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    "Bienvenido/a a Shalom, ${tipo[int.parse(control.consulta![0].TIPO) - 1]} - ${control.consulta![0].NOMBRE}!\nMira, eres tú 👇!",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
               ),

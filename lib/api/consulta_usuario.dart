@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-Future<List<usuario2>> consultaUsuario(String usr, String pssw) async {
+Future<List<UserLoggedInfo>> consultaUsuario(String usr, String pssw) async {
   var url = Uri.parse("http://localhost/shalom/api_consultaUser.php");
   final response = await http.post(url, body: {"usuario": usr, "pssw": pssw});
 
@@ -14,28 +14,30 @@ Future<List<usuario2>> consultaUsuario(String usr, String pssw) async {
   }
 }
 
-List<usuario2> pasaraListapqrs(String respuestaBody) {
+List<UserLoggedInfo> pasaraListapqrs(String respuestaBody) {
   final pasar = json.decode(respuestaBody).cast<Map<String, dynamic>>();
 
-  return pasar.map<usuario2>((json) => usuario2.fromJson(json)).toList();
+  return pasar
+      .map<UserLoggedInfo>((json) => UserLoggedInfo.fromJson(json))
+      .toList();
 }
 
-class usuario2 {
+class UserLoggedInfo {
   final IDUSUARIO;
   final USUARIO;
   final NOMBRE;
   final IDENTIFICACION;
   final TIPO;
 
-  usuario2(
+  UserLoggedInfo(
       {this.IDUSUARIO,
       this.USUARIO,
       this.NOMBRE,
       this.IDENTIFICACION,
       this.TIPO});
 
-  factory usuario2.fromJson(Map<String, dynamic> json) {
-    return usuario2(
+  factory UserLoggedInfo.fromJson(Map<String, dynamic> json) {
+    return UserLoggedInfo(
         IDUSUARIO: json['ID_USUARIO'],
         USUARIO: json['USUARIO'],
         NOMBRE: json['NOMBRE'],

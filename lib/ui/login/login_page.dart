@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:principal_shalom/ui/login_box.dart';
+import 'package:principal_shalom/ui/login/login_box.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -32,6 +32,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
         title: const Text("Menú"),
       ),
       body: Container(
+        height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
             image: DecorationImage(
           opacity: 0.5,
@@ -66,10 +67,12 @@ class _MyLoginPageState extends State<MyLoginPage> {
               LoginBox(),
               const SizedBox(height: 30), // Espacio vertical adicional
               const Text(
+                // Texto de información adicional
                 "Centro Educativo Shalom 2023\nTodos los derechos reservados",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold),
-              ) // Texto de información adicional
+              ),
+              const SizedBox(height: 30)
             ],
           ),
         ),

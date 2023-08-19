@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:principal_shalom/api/consulta_tipos.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
 import '../api/insertar_persona.dart';
 
@@ -11,10 +12,24 @@ class InsertarUsuario {
   final txtid = TextEditingController();
   final txttipo = TextEditingController();
 
+  // Controlador
+  ControlUsuarios CC = Get.find();
+
+  // La Key para el formulario
   final _formKey = GlobalKey<FormState>();
 
   void mostrarFormulario(BuildContext context) {
-    txttipo.text = "1";
+    // Se intenta obtener los tipos de usuario de la db
+    try {
+      consultaTipos().then((value) {
+        CC.cargarTipos(value);
+      });
+    } catch (e) {
+      print("Error al cargar los tipos: $e");
+    }
+
+    final mainContext = context; // Almacenar el contexto principal
+
     showModalBottomSheet(
         isScrollControlled: true,
         context: context,
@@ -30,15 +45,15 @@ class InsertarUsuario {
                     // Un aviso o advertencia de que el nuevo usuario será de tipo 'Estudiante'
                     child: ListTile(
                       tileColor: Colors.green[50],
-                      leading: Icon(Icons.warning),
-                      title: Center(
+                      leading: const Icon(Icons.warning),
+                      title: const Center(
                         child: Text("AVISO"),
                       ),
-                      subtitle: Center(
-                        child:
-                            Text("El Nuevo Usuario será de tipo 'Estudiante'"),
+                      subtitle: const Center(
+                        child: Text(
+                            "Para añadir un nuevo Administrador, contacte al Admin de la base de datos"),
                       ),
-                      trailing: Icon(Icons.warning),
+                      trailing: const Icon(Icons.warning),
                     ),
                   ),
                   Form(
@@ -48,7 +63,7 @@ class InsertarUsuario {
                         TextFormField(
                           maxLength: 50,
                           controller: txtuser,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "Usuario",
                               labelText: "Nombre de Usuario"),
                           validator: (value) {
@@ -63,7 +78,7 @@ class InsertarUsuario {
                           obscureText: true,
                           maxLength: 20,
                           controller: txtpssw,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "123ABC", labelText: "Contrasena"),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -76,7 +91,7 @@ class InsertarUsuario {
                         TextFormField(
                           maxLength: 50,
                           controller: txtname,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "NOMBRE APELLIDO", labelText: "Nombre"),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -89,7 +104,7 @@ class InsertarUsuario {
                         TextFormField(
                           maxLength: 15,
                           controller: txtid,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "0 000 000 000", labelText: "CC"),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -98,18 +113,45 @@ class InsertarUsuario {
                             return null;
                           },
                         ),
+                        TextFormField(
+                          maxLength: 10,
+                          controller: txttipo,
+                          decoration: const InputDecoration(
+                              hintText: "Estudiante / Profesor",
+                              labelText: "Tipo"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Ingrese el tipo de usuario';
+                            }
+                            return null;
+                          },
+                        ),
                         Divider(),
                         // Boton que envía los datos a la API y luego a la base de datos
                         ElevatedButton.icon(
                             onPressed: () {
+                              String tipo;
+
+                              if (txttipo.text == "Estudiante" ||
+                                  txttipo.text == "1") {
+                                tipo = "1";
+                              } else if (txttipo.text == "Profesor" ||
+                                  txttipo.text == "2") {
+                                tipo = "2";
+                              } else {
+                                txttipo.clear();
+                                tipo = "";
+                              }
+
                               if (_formKey.currentState!.validate()) {
                                 insertarPersona(txtuser.text, txtpssw.text,
-                                        txtname.text, txtid.text, txttipo.text)
+                                        txtname.text, txtid.text, tipo)
                                     .then((respuesta) {
-                                  ControlPersonas CC = Get.find();
+                                  ControlUsuarios CC = Get.find();
                                   CC.guardarUsuario(respuesta);
                                   showDialog(
-                                      context: context,
+                                      context:
+                                          mainContext, // Usar el contexto principal aquí
                                       builder: (BuildContext context) {
                                         return AlertDialog(
                                             title: Text('Usuario agregado'),
@@ -125,10 +167,12 @@ class InsertarUsuario {
                                             ]);
                                       });
                                 });
+                                Navigator.pop(mainContext);
                                 Navigator.pop(context);
                               } else {
                                 showDialog(
-                                    context: context,
+                                    context:
+                                        mainContext, // Usar el contexto principal aquí
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                           title: Text('AVISO!'),

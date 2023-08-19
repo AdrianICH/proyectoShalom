@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:principal_shalom/api/consulta_usuario.dart';
 import 'package:principal_shalom/api/nuevo_acceso.dart';
-import 'package:principal_shalom/proceso/modal_login_usuario.dart';
-import 'package:principal_shalom/proceso/new_user.dart';
-import '../controllers/controlador_general.dart';
+import 'package:principal_shalom/controllers/controlador_general.dart';
+import 'package:principal_shalom/proceso/modal_bienvenida_usuario.dart';
+import 'package:principal_shalom/ui/login/admin/admin_access.dart';
 
 class LoginForm {
   // Comunicación con el controlador general
-  ControlPersonas control = Get.find();
+  ControlUsuarios control = Get.find();
   final _formKey = GlobalKey<FormState>();
   // Controladores para los campo usuario y contrasena
   TextEditingController userController = TextEditingController();
@@ -93,7 +93,7 @@ class LoginForm {
                             DateFormat.Hms().format(DateTime.now()),
                             DateFormat.yMd().format(DateTime.now()),
                             "1");
-                        MostrarUsuario().mostarDatosUsuario(context);
+                        MostrarBienvenida().mostarDatosUsuario(context);
                       }
                     });
                     // Se limpian los campos usuario y contrasena
@@ -120,10 +120,11 @@ class LoginForm {
               // Boton para crear un nuevo usuario
               child: ElevatedButton(
                 onPressed: () {
-                  InsertarUsuario().mostrarFormulario(context);
+                  mostrarLoginAdmin(context);
                 },
                 child: const Text(
-                  'Crear nuevo usuario',
+                  'Crear nuevo usuario\n(Administrador)',
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15),
                 ),
               ),
