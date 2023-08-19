@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-Future<List<userTypes>> consultaUsuario() async {
+Future<List<userTypes>> consultaTipos() async {
   var url = Uri.parse("http://localhost/shalom/api_consultaTipos.php");
-  final response = await http.post(url, body: "");
+  final response = await http.post(url, body: {});
 
   if (response.statusCode == 200) {
     return compute(pasaraListapqrs, response.body);
