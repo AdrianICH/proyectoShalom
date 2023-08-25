@@ -34,7 +34,7 @@ class MostrarBienvenida {
                   child: ListTile(
                       tileColor: Colors.green[50],
                       leading: Text(control.consulta![0].USUARIO),
-                      trailing: Icon(Icons.person),
+                      trailing: const Icon(Icons.person),
                       subtitle: Text(control.consulta![0].IDENTIFICACION),
                       title: Text(
                         control.consulta![0].NOMBRE,

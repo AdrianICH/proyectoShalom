@@ -23,11 +23,25 @@ class ControlUsuarios extends GetxController {
   List<UserLoggedInfo>? get consulta => _consulta.value;
 
   //Consulta de Tipos
-  final Rxn<List<userTypes>> _types = Rxn<List<userTypes>>();
+  final Rxn<List<UserTypes>> _types = Rxn<List<UserTypes>>();
 
-  void cargarTipos(List<userTypes> X) {
+  void cargarTipos(List<UserTypes> X) {
     _types.value = X;
   }
 
-  List<userTypes>? get types => _types.value;
+  Future<String> verificacion(String formType) async {
+    final respuesta = await consultaTipos();
+    cargarTipos(respuesta);
+    var tipo = "";
+    for (var i = 0; i < types!.length; i++) {
+      if (types![i].NOMBRE == formType || types![i].IDTIPO == formType) {
+        tipo = (i + 1).toString();
+        break;
+      }
+    }
+
+    return tipo;
+  }
+
+  List<UserTypes>? get types => _types.value;
 }

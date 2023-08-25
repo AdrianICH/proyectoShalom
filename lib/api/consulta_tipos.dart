@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-Future<List<userTypes>> consultaTipos() async {
+Future<List<UserTypes>> consultaTipos() async {
   var url = Uri.parse("http://localhost/shalom/api_consultaTipos.php");
   final response = await http.post(url, body: {});
 
@@ -14,22 +14,22 @@ Future<List<userTypes>> consultaTipos() async {
   }
 }
 
-List<userTypes> pasaraListapqrs(String respuestaBody) {
+List<UserTypes> pasaraListapqrs(String respuestaBody) {
   final pasar = json.decode(respuestaBody).cast<Map<String, dynamic>>();
 
-  return pasar.map<userTypes>((json) => userTypes.fromJson(json)).toList();
+  return pasar.map<UserTypes>((json) => UserTypes.fromJson(json)).toList();
 }
 
-class userTypes {
+class UserTypes {
   final IDTIPO;
   final NOMBRE;
 
-  userTypes({
+  UserTypes({
     this.IDTIPO,
     this.NOMBRE,
   });
 
-  factory userTypes.fromJson(Map<String, dynamic> json) {
-    return userTypes(IDTIPO: json['ID_TIPO'], NOMBRE: json['NOMBRE']);
+  factory UserTypes.fromJson(Map<String, dynamic> json) {
+    return UserTypes(IDTIPO: json['ID_TIPO'], NOMBRE: json['NOMBRE']);
   }
 }

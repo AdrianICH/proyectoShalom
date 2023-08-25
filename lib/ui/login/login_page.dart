@@ -46,7 +46,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
             children: [
               Row(
                 children: [
-                  Container(
+                  SizedBox(
                     // Contenedor dinamico que se adapta al tamaño de la pantalla
                     width: MediaQuery.of(context).size.width * 0.9,
                     height: 80,
