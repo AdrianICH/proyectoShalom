@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:principal_shalom/api/consulta_tipos.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
 import '../api/insertar_persona.dart';
 
@@ -19,15 +18,6 @@ class InsertarUsuario {
   final _formKey = GlobalKey<FormState>();
 
   void mostrarFormulario(BuildContext context) {
-    // Se intenta obtener los tipos de usuario de la db
-    try {
-      consultaTipos().then((value) {
-        CC.cargarTipos(value);
-      });
-    } catch (e) {
-      print("Error al cargar los tipos: $e");
-    }
-
     final mainContext = context; // Almacenar el contexto principal
 
     showModalBottomSheet(
@@ -36,7 +26,7 @@ class InsertarUsuario {
         builder: (BuildContext c2) {
           return Column(children: [
             AppBar(
-              title: Text("Regresar"),
+              title: const Text("Regresar"),
             ),
             Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -126,71 +116,65 @@ class InsertarUsuario {
                             return null;
                           },
                         ),
-                        Divider(),
+                        const Divider(),
                         // Boton que envía los datos a la API y luego a la base de datos
                         ElevatedButton.icon(
-                            onPressed: () {
-                              String tipo;
-
-                              if (txttipo.text == "Estudiante" ||
-                                  txttipo.text == "1") {
-                                tipo = "1";
-                              } else if (txttipo.text == "Profesor" ||
-                                  txttipo.text == "2") {
-                                tipo = "2";
-                              } else {
-                                txttipo.clear();
-                                tipo = "";
-                              }
-
-                              if (_formKey.currentState!.validate()) {
-                                insertarPersona(txtuser.text, txtpssw.text,
-                                        txtname.text, txtid.text, tipo)
-                                    .then((respuesta) {
-                                  ControlUsuarios CC = Get.find();
-                                  CC.guardarUsuario(respuesta);
-                                  showDialog(
-                                      context:
-                                          mainContext, // Usar el contexto principal aquí
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                            title: Text('Usuario agregado'),
-                                            content: Text(
-                                                "El usuario '${CC.datos![0].USUARIO}' se ha agregado satisfactoriamente."),
-                                            actions: [
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Text('Cerrar'),
-                                              ),
-                                            ]);
-                                      });
-                                });
-                                Navigator.pop(mainContext);
-                                Navigator.pop(context);
-                              } else {
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              String tipoFinal =
+                                  await CC.verificacion(txttipo.text);
+                              insertarPersona(txtuser.text, txtpssw.text,
+                                      txtname.text, txtid.text, tipoFinal)
+                                  .then((respuesta) {
+                                ControlUsuarios CC = Get.find();
+                                CC.guardarUsuario(respuesta);
                                 showDialog(
                                     context:
                                         mainContext, // Usar el contexto principal aquí
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                          title: Text('AVISO!'),
+                                          title: const Text('Usuario agregado'),
                                           content: Text(
-                                              'El usuario no se ha podido agregar.'),
+                                              "El usuario '${CC.datos![0].USUARIO}' se ha agregado satisfactoriamente."),
                                           actions: [
                                             ElevatedButton(
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('Cerrar'),
+                                              child: const Text('Cerrar'),
                                             ),
                                           ]);
                                     });
+                              });
+                              if (mainContext.mounted) {
+                                Navigator.pop(mainContext);
                               }
-                            },
-                            icon: Icon(Icons.send),
-                            label: Text("Registrar"))
+                              if (context.mounted) {
+                                Navigator.pop(context);
+                              }
+                            } else {
+                              showDialog(
+                                  context:
+                                      mainContext, // Usar el contexto principal aquí
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                        title: const Text('AVISO!'),
+                                        content: const Text(
+                                            'El usuario no se ha podido agregar.'),
+                                        actions: [
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Cerrar'),
+                                          ),
+                                        ]);
+                                  });
+                            }
+                          },
+                          icon: const Icon(Icons.send),
+                          label: const Text("Registrar"),
+                        ),
                       ]))
                 ])),
           ]);
