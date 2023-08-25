@@ -15,6 +15,10 @@ Future<List<Usuario>> insertarPersona(
   });
 
   if (response.statusCode == 200) {
+    if (response.body ==
+        "Ha sucedido un error inexperado en la desconexion de la base de datos") {
+      return [];
+    }
     return compute(pasaraListapqrs, response.body);
   } else {
     throw Exception('Failed to create album.');
