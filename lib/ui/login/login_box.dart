@@ -34,7 +34,7 @@ class _LoginBoxState extends State<LoginBox> {
               decoration: BoxDecoration(
                   color: Colors.blue[50],
                   border:
-                      Border(top: BorderSide(color: Colors.black, width: 2))),
+                      const Border(top: BorderSide(color: Colors.black, width: 2))),
               padding: const EdgeInsets.only(bottom: 10, left: 5, right: 5),
               child: const Text(
                 'Acceda a su cuenta',
