@@ -28,15 +28,22 @@ List<Usuario> pasaraListapqrs(String respuestaBody) {
 }
 
 class Usuario {
+  final IDUSUARIO;
   final USUARIO;
   final NOMBRE;
   final IDENTIFICACION;
   final TIPO;
 
-  Usuario({this.USUARIO, this.NOMBRE, this.IDENTIFICACION, this.TIPO});
+  Usuario(
+      {this.IDUSUARIO,
+      this.USUARIO,
+      this.NOMBRE,
+      this.IDENTIFICACION,
+      this.TIPO});
 
   factory Usuario.fromJson(Map<String, dynamic> json) {
     return Usuario(
+        IDUSUARIO: json['ID_USUARIO'],
         USUARIO: json['USUARIO'],
         NOMBRE: json['NOMBRE'],
         IDENTIFICACION: json['IDENTIFICACION'],
