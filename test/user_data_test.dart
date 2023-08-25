@@ -55,13 +55,16 @@ void main() {
     var respuesta = await insertarPersona(
         "adriactor63", "qscxzsewaxd", "Adrian Hernandez", "1114902470", "2");
     control.guardarUsuario(respuesta);
-    expect(control.datos![0].USUARIO, "adriactor63");
+    expect(control.datos![0].USUARIO, "adriactor63",
+        reason: "Verificar que el usuario ha sido agregado satisfactoriamente");
   });
 
   test('Testeo de eliminacion de usuarios', () async {
     var sndRespuesta = await eliminarUser("adriactor63");
     if (sndRespuesta != "El usuario no existe o ya ha sido eliminado") {
-      expect(sndRespuesta, "Se ha eliminado el usuario: adriactor63");
+      expect(sndRespuesta, "Se ha eliminado el usuario: adriactor63",
+          reason:
+              "Verificar el el usuario ha sido eliminado satisfactoriamente");
     }
   });
 }
