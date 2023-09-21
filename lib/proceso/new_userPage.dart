@@ -60,7 +60,7 @@ class _NewUserFormState extends State<NewUserForm> {
                         hintText: "NOMBRE APELLIDO", labelText: "Nombre"),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Ingrese nombre';
+                        return 'Ingrese nombre y apellido';
                       }
                       return null;
                     },
@@ -85,8 +85,10 @@ class _NewUserFormState extends State<NewUserForm> {
                         hintText: "example@email.com",
                         labelText: "Correo electronico"),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Ingrese un correo electronico';
+                      if (value == null ||
+                          value.isEmpty ||
+                          !value.contains("@")) {
+                        return 'Ingrese un correo electronico valido';
                       }
                       return null;
                     },
@@ -96,7 +98,7 @@ class _NewUserFormState extends State<NewUserForm> {
                     maxLength: 20,
                     controller: txtpssw,
                     decoration: const InputDecoration(
-                        hintText: "123ABC", labelText: "Contrasena"),
+                        hintText: "Contraseña", labelText: "Contrasena"),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Ingrese contrasena';
