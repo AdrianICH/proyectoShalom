@@ -3,11 +3,12 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-Future<List<Usuario>> insertarPersona(
-    String usr, String pssw, String name, String id, String tipo) async {
+Future<List<Usuario>> insertarPersona(String usr, String email, String pssw,
+    String name, String id, String tipo) async {
   var url = Uri.parse("http://localhost/shalom/api_insertar.php");
   final response = await http.post(url, body: {
     "usuario": usr,
+    "correo": email,
     "pssw": pssw,
     "nombre": name,
     "id": id,
