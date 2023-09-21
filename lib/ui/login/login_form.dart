@@ -5,7 +5,7 @@ import 'package:principal_shalom/api/consulta_usuario.dart';
 import 'package:principal_shalom/api/nuevo_acceso.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
 import 'package:principal_shalom/proceso/modal_bienvenida_usuario.dart';
-import 'package:principal_shalom/ui/login/creds_forgot.dart';
+import 'package:principal_shalom/proceso/creds_forgot.dart';
 
 class LoginForm {
   // Comunicación con el controlador general
