@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
-import 'package:principal_shalom/proceso/new_user.dart';
+import 'package:principal_shalom/proceso/new_userPage.dart';
 
 class AdminMenu extends StatefulWidget {
   const AdminMenu({super.key});
@@ -12,15 +12,63 @@ class AdminMenu extends StatefulWidget {
 
 class _AdminMenuState extends State<AdminMenu> {
   ControlUsuarios control = Get.find();
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    NewUserForm(), // Aquí debes definir tus páginas
+
+    // ... Añade más páginas según sea necesario
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final mainContext = context;
+
     return Scaffold(
       appBar: AppBar(
           title: Text(
         "Bienvenido/a a Shalom, ${control.consulta![0].NOMBRE} 👍!",
         style: TextStyle(fontSize: 14),
       )),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Menú de Administrador',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person_add),
+              title: Text('Crear un nuevo usuario'),
+              onTap: () {
+                Navigator.pop(context); // Cierra el Drawer
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.list),
+              title: Text('Listar estudiantes'),
+              // Agrega la lógica para listar estudiantes aquí
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app), // Icono para salir
+              title: Text('Salir'),
+              onTap: () {
+                Navigator.pop(mainContext);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -31,24 +79,9 @@ class _AdminMenuState extends State<AdminMenu> {
               "light-blue-background.jpg"), // Este es una imagen que sirve como background de la pagina
           fit: BoxFit.cover,
         )),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    InsertarUsuario().mostrarFormulario(context);
-                  },
-                  child: const Text(
-                    'Crear un nuevo usuario',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        child: IndexedStack(
+          index: _selectedIndex,
+          children: _pages,
         ),
       ),
     );
