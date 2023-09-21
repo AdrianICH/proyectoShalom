@@ -1,16 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:principal_shalom/api/consulta_tipos.dart';
-import 'package:principal_shalom/api/consulta_usuario.dart';
+import 'package:principal_shalom/api/login_api.dart';
 import 'package:principal_shalom/api/eliminar_usuario.dart';
 import 'package:principal_shalom/api/insertar_persona.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
 
 void main() {
   test('Testeo de llamada usuario desde API y respuesta', () async {
-    final respuesta = await consultaUsuario("Ambaru", "9091");
+    final respuesta = await loginAPI("gabiz12", "121212");
 
-    expect(respuesta, isInstanceOf<List<UserLoggedInfo>>(),
+    expect(respuesta, isInstanceOf<List<UserData>>(),
         reason:
             "Verificar si la instancia devuelta es de tipo List<UserLoggedInfo>");
     expect(respuesta.isEmpty, false,
@@ -20,10 +20,10 @@ void main() {
   test('Testeo de llamada nombre de usuario desde API y controlador', () async {
     Get.put(ControlUsuarios());
     ControlUsuarios control = Get.find();
-    final respuesta = await consultaUsuario("Ambaru", "9091");
+    final respuesta = await loginAPI("gabiz12", "121212");
 
     control.cargarUsuario(respuesta);
-    expect(control.consulta?[0].NOMBRE, "Ambar Isbel",
+    expect(control.consulta?[0].NOMBRE, "Gabriel Ramoz",
         reason:
             "Verificar si los datos llamados del usuario son correctos/no están manipulados");
   });
