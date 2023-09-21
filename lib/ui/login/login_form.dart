@@ -123,7 +123,7 @@ class LoginForm {
                   mostrarLoginAdmin(context);
                 },
                 child: const Text(
-                  'Crear nuevo usuario\n(Administrador)',
+                  'Ingresar como Administrador',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15),
                 ),
