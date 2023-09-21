@@ -1,0 +1,22 @@
+import 'dart:convert';
+import 'dart:async';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+import 'package:principal_shalom/api/insertar_persona.dart';
+
+Future<List<UserData>> loginAPI(String usr, String pssw) async {
+  var url = Uri.parse("http://localhost/shalom/api_consultaUser.php");
+  final response = await http.post(url, body: {"usuario": usr, "pssw": pssw});
+
+  if (response.statusCode == 200) {
+    return compute(pasaraListapqrs, response.body);
+  } else {
+    throw Exception('Failed to create album.');
+  }
+}
+
+List<UserData> pasaraListapqrs(String respuestaBody) {
+  final pasar = json.decode(respuestaBody).cast<Map<String, dynamic>>();
+
+  return pasar.map<UserData>((json) => UserData.fromJson(json)).toList();
+}
