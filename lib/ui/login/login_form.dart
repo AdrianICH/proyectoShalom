@@ -5,7 +5,6 @@ import 'package:principal_shalom/api/consulta_usuario.dart';
 import 'package:principal_shalom/api/nuevo_acceso.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
 import 'package:principal_shalom/proceso/modal_bienvenida_usuario.dart';
-import 'package:principal_shalom/ui/login/admin/admin_access.dart';
 
 class LoginForm {
   // Comunicación con el controlador general
@@ -120,10 +119,58 @@ class LoginForm {
               // Boton para crear un nuevo usuario
               child: ElevatedButton(
                 onPressed: () {
-                  mostrarLoginAdmin(context);
+                  if (_formKey.currentState!.validate()) {
+                    consultaUsuario(
+                            userController.text, passwordController.text)
+                        .then((respuesta) {
+                      if (respuesta.isEmpty) {
+                        // Si la respuesta es una lista vacía,
+                        // significa que el usuario no existe o la contrasena está mal
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Usuario y/o contrasena incorrectos'),
+                          ),
+                        );
+                      } else {
+                        // Si no, significa que se ha iniciado sesion
+                        // y se mostrará la informacion personal del usuario
+                        control.cargarUsuario(respuesta);
+
+                        if (control.consulta![0].TIPO == "3") {
+                          nuevoAcceso(
+                              control.consulta![0].IDUSUARIO,
+                              DateFormat.Hms().format(DateTime.now()),
+                              DateFormat.yMd().format(DateTime.now()),
+                              "1");
+                          Navigator.pushNamed(context, '/admin');
+                        } else {
+                          nuevoAcceso(
+                              control.consulta![0].IDUSUARIO,
+                              DateFormat.Hms().format(DateTime.now()),
+                              DateFormat.yMd().format(DateTime.now()),
+                              "3");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('El usuario no es Administrador'),
+                            ),
+                          );
+                        }
+                      }
+                    });
+                    // Se limpian los campos usuario y contrasena
+                    userController.clear();
+                    passwordController.clear();
+                  } else {
+                    // Mensaje de aviso para que el usuario ingrese sus credenciales
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Por favor, ingrese las credenciales'),
+                      ),
+                    );
+                  }
                 },
                 child: const Text(
-                  'Ingresar como Administrador',
+                  'Acceder como Administrador',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15),
                 ),
