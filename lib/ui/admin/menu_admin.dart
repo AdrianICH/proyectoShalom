@@ -54,9 +54,19 @@ class _AdminMenuState extends State<AdminMenu> {
               },
             ),
             ListTile(
+              leading: Icon(Icons.list_alt),
+              title: Text('Listar todos los usuarios'),
+              onTap: () {},
+            ),
+            ListTile(
               leading: Icon(Icons.list),
               title: Text('Listar estudiantes'),
-              // Agrega la lógica para listar estudiantes aquí
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.list),
+              title: Text('Listar profesores'),
+              onTap: () {},
             ),
             ListTile(
               leading: Icon(Icons.exit_to_app), // Icono para salir
