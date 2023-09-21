@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:principal_shalom/ui/login/admin/menu_admin.dart';
+import 'package:principal_shalom/ui/admin/menu_admin.dart';
 import 'package:principal_shalom/ui/login/login_box.dart';
 
 class Login extends StatelessWidget {
