@@ -53,7 +53,12 @@ void main() {
     Get.put(ControlUsuarios());
     ControlUsuarios control = Get.find();
     var respuesta = await insertarPersona(
-        "adriactor63", "qscxzsewaxd", "Adrian Hernandez", "1114902470", "2");
+        "adriactor63",
+        "adriancue204@gmail.com",
+        "qscxzsewaxd",
+        "Adrian Hernandez",
+        "1114902470",
+        "2");
     control.guardarUsuario(respuesta);
     if (control.datos!.isEmpty) {
       expect(control.datos, [],
