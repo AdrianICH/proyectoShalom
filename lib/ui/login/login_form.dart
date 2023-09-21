@@ -148,7 +148,7 @@ class LoginForm {
             const SizedBox(height: 10),
             // Checkbox relacionado al inicio de sesion, no es interactivo
             const CheckboxListTile(
-              value: true,
+              value: false,
               onChanged: null,
               controlAffinity: ListTileControlAffinity.leading,
               title: Text("Mantener la sesión abierta"),
