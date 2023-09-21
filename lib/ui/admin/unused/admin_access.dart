@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:principal_shalom/api/consulta_usuario.dart';
+import 'package:principal_shalom/api/login_api.dart';
 import 'package:principal_shalom/api/nuevo_acceso.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
 
@@ -83,7 +83,7 @@ void mostrarLoginAdmin(BuildContext context) {
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  consultaUsuario(userController.text,
+                                  loginAPI(userController.text,
                                           passwordController.text)
                                       .then((respuesta) {
                                     if (respuesta.isEmpty) {

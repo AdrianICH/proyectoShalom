@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:principal_shalom/api/consulta_usuario.dart';
+import 'package:principal_shalom/api/login_api.dart';
 import 'package:principal_shalom/api/nuevo_acceso.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
 import 'package:principal_shalom/proceso/modal_bienvenida_usuario.dart';
@@ -73,8 +73,7 @@ class LoginForm {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    consultaUsuario(
-                            userController.text, passwordController.text)
+                    loginAPI(userController.text, passwordController.text)
                         .then((respuesta) {
                       if (respuesta.isEmpty) {
                         // Si la respuesta es una lista vacía,
@@ -117,12 +116,10 @@ class LoginForm {
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              // Boton para crear un nuevo usuario
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    consultaUsuario(
-                            userController.text, passwordController.text)
+                    loginAPI(userController.text, passwordController.text)
                         .then((respuesta) {
                       if (respuesta.isEmpty) {
                         // Si la respuesta es una lista vacía,
