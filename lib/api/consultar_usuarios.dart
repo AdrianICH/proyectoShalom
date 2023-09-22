@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:principal_shalom/api/insertar_persona.dart';
 
-Future<List<UserData>> consultarUsuarios(String condition) async {
+Future<List<UserData>> consultarUsuarios(String tipo) async {
   var url = Uri.parse("http://localhost/shalom/api_listarUsers.php");
-  final response = await http.post(url, body: {"ctn": condition});
+  final response = await http.post(url, body: {"tp": tipo});
 
   if (response.statusCode == 200) {
     return compute(pasaraListapqrs, response.body);
