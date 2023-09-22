@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:principal_shalom/api/consultar_usuarios.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
+import 'package:principal_shalom/proceso/listado_usuariosxtipo.dart';
 import 'package:principal_shalom/proceso/new_userPage.dart';
 
 class AdminMenu extends StatefulWidget {
@@ -11,13 +13,16 @@ class AdminMenu extends StatefulWidget {
 }
 
 class _AdminMenuState extends State<AdminMenu> {
+  // Controlador
   ControlUsuarios control = Get.find();
+
+  //Indice para paginas
   int _selectedIndex = 0;
 
+  // Lista de paginas
   final List<Widget> _pages = [
-    NewUserForm(), // Aquí debes definir tus páginas
-
-    // ... Añade más páginas según sea necesario
+    Container(),
+    NewUserForm(), ListadoUsuarios() // Aquí debes definir tus páginas
   ];
 
   @override
@@ -27,8 +32,8 @@ class _AdminMenuState extends State<AdminMenu> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-        "Bienvenido/a a Shalom, ${control.consulta![0].NOMBRE} 👍!",
-        style: TextStyle(fontSize: 14),
+        "Bienvenido/a , ${control.consulta![0].NOMBRE} 👍!",
+        style: TextStyle(fontSize: 16),
       )),
       drawer: Drawer(
         child: ListView(
@@ -50,23 +55,47 @@ class _AdminMenuState extends State<AdminMenu> {
               leading: Icon(Icons.person_add),
               title: Text('Crear un nuevo usuario'),
               onTap: () {
+                setState(() {
+                  _selectedIndex = 1; // o el índice de la página deseada
+                });
                 Navigator.pop(context); // Cierra el Drawer
               },
             ),
             ListTile(
               leading: Icon(Icons.list_alt),
               title: Text('Listar todos los usuarios'),
-              onTap: () {},
+              onTap: () {
+                consultarUsuarios("!=3")
+                    .then((respuesta) => control.guardarUsuario(respuesta));
+                setState(() {
+                  _selectedIndex = 2; // o el índice de la página deseada
+                });
+                Navigator.pop(context);
+              },
             ),
             ListTile(
               leading: Icon(Icons.list),
               title: Text('Listar estudiantes'),
-              onTap: () {},
+              onTap: () {
+                consultarUsuarios("=1")
+                    .then((respuesta) => control.guardarUsuario(respuesta));
+                setState(() {
+                  _selectedIndex = 2; // o el índice de la página deseada
+                });
+                Navigator.pop(context);
+              },
             ),
             ListTile(
               leading: Icon(Icons.list),
               title: Text('Listar profesores'),
-              onTap: () {},
+              onTap: () {
+                consultarUsuarios("=2")
+                    .then((respuesta) => control.guardarUsuario(respuesta));
+                setState(() {
+                  _selectedIndex = 2; // o el índice de la página deseada
+                });
+                Navigator.pop(context);
+              },
             ),
             ListTile(
               leading: Icon(Icons.exit_to_app), // Icono para salir
