@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../api/login_api.dart';
 
 class ControlUsuarios extends GetxController {
-  //Registrar Nuevo Usuario datos
+  //Datos de Usuario
   final Rxn<List<UserData>> _datos = Rxn<List<UserData>>();
 
   void guardarUsuario(List<UserData> X) {
