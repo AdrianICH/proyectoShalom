@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
-import '../api/insertar_persona.dart';
+import '../../api/insertar_persona.dart';
 
 class InsertarUsuario {
   // Controladores para cada campo dentro del formulario
   final txtuser = TextEditingController();
   final txtpssw = TextEditingController();
   final txtname = TextEditingController();
+  final txtemail = TextEditingController();
   final txtid = TextEditingController();
   final txttipo = TextEditingController();
 
@@ -24,11 +25,12 @@ class InsertarUsuario {
         isScrollControlled: true,
         context: context,
         builder: (BuildContext c2) {
-          return Column(children: [
-            AppBar(
+          return Scaffold(
+            appBar: AppBar(
               title: const Text("Regresar"),
             ),
-            Padding(
+            body: SingleChildScrollView(
+              child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(children: [
                   Center(
@@ -41,7 +43,7 @@ class InsertarUsuario {
                       ),
                       subtitle: const Center(
                         child: Text(
-                            "Para añadir un nuevo Administrador, contacte al Admin de la base de datos"),
+                            "Para añadir un nuevo Administrador, contacte al administrador de la base de datos"),
                       ),
                       trailing: const Icon(Icons.warning),
                     ),
@@ -50,6 +52,18 @@ class InsertarUsuario {
                       key: _formKey,
                       child: Column(children: [
                         // Campo de Usuario
+                        TextFormField(
+                          maxLength: 50,
+                          controller: txtname,
+                          decoration: const InputDecoration(
+                              hintText: "NOMBRE APELLIDO", labelText: "Nombre"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Ingrese nombre';
+                            }
+                            return null;
+                          },
+                        ),
                         TextFormField(
                           maxLength: 50,
                           controller: txtuser,
@@ -63,7 +77,20 @@ class InsertarUsuario {
                             return null;
                           },
                         ),
-                        // Campo de contrasena
+                        // Campo de usuario
+                        TextFormField(
+                          maxLength: 50,
+                          controller: txtemail,
+                          decoration: const InputDecoration(
+                              hintText: "example@email.com",
+                              labelText: "Correo electronico"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Ingrese un correo electronico';
+                            }
+                            return null;
+                          },
+                        ),
                         TextFormField(
                           obscureText: true,
                           maxLength: 20,
@@ -77,20 +104,7 @@ class InsertarUsuario {
                             return null;
                           },
                         ),
-                        // Campo de Nombre
-                        TextFormField(
-                          maxLength: 50,
-                          controller: txtname,
-                          decoration: const InputDecoration(
-                              hintText: "NOMBRE APELLIDO", labelText: "Nombre"),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Ingrese nombre';
-                            }
-                            return null;
-                          },
-                        ),
-                        // Campo de la Cedula de Ciudadania
+                        // Campo de contrasena
                         TextFormField(
                           maxLength: 15,
                           controller: txtid,
@@ -123,8 +137,13 @@ class InsertarUsuario {
                             if (_formKey.currentState!.validate()) {
                               String tipoFinal =
                                   await CC.verificacion(txttipo.text);
-                              insertarPersona(txtuser.text, txtpssw.text,
-                                      txtname.text, txtid.text, tipoFinal)
+                              insertarPersona(
+                                      txtuser.text,
+                                      txtemail.text,
+                                      txtpssw.text,
+                                      txtname.text,
+                                      txtid.text,
+                                      tipoFinal)
                                   .then((respuesta) {
                                 ControlUsuarios CC = Get.find();
                                 CC.guardarUsuario(respuesta);
@@ -146,9 +165,6 @@ class InsertarUsuario {
                                           ]);
                                     });
                               });
-                              if (mainContext.mounted) {
-                                Navigator.pop(mainContext);
-                              }
                               if (context.mounted) {
                                 Navigator.pop(context);
                               }
@@ -176,8 +192,10 @@ class InsertarUsuario {
                           label: const Text("Registrar"),
                         ),
                       ]))
-                ])),
-          ]);
+                ]),
+              ),
+            ),
+          );
         });
   }
 }

@@ -1,26 +1,26 @@
 import 'package:principal_shalom/api/consulta_tipos.dart';
 import 'package:principal_shalom/api/insertar_persona.dart';
 import 'package:get/get.dart';
-import '../api/consulta_usuario.dart';
+import '../api/login_api.dart';
 
 class ControlUsuarios extends GetxController {
-  //Registrar Nuevo Usuario datos
-  final Rxn<List<Usuario>> _datos = Rxn<List<Usuario>>();
+  //Datos de Usuario
+  final Rxn<List<UserData>> _datos = Rxn<List<UserData>>();
 
-  void guardarUsuario(List<Usuario> X) {
+  void guardarUsuario(List<UserData> X) {
     _datos.value = X;
   }
 
-  List<Usuario>? get datos => _datos.value;
+  List<UserData>? get datos => _datos.value;
 
   //Iniciar Sesion datos
-  final Rxn<List<UserLoggedInfo>> _consulta = Rxn<List<UserLoggedInfo>>();
+  final Rxn<List<UserData>> _consulta = Rxn<List<UserData>>();
 
-  void cargarUsuario(List<UserLoggedInfo> X) {
+  void cargarUsuario(List<UserData> X) {
     _consulta.value = X;
   }
 
-  List<UserLoggedInfo>? get consulta => _consulta.value;
+  List<UserData>? get consulta => _consulta.value;
 
   //Consulta de Tipos
   final Rxn<List<UserTypes>> _types = Rxn<List<UserTypes>>();

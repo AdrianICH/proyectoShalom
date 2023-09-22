@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:principal_shalom/api/consulta_usuario.dart';
+import 'package:principal_shalom/api/login_api.dart';
 import 'package:principal_shalom/api/nuevo_acceso.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
-import 'package:principal_shalom/proceso/new_user.dart';
 
 // Comunicación con el controlador general
 ControlUsuarios control = Get.find();
@@ -18,12 +17,9 @@ void mostrarLoginAdmin(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-            title: const Text(
-                'Necesita acceder como Administrador para crear un nuevo usuario'),
             content: Container(
               width: MediaQuery.of(context).size.width * 0.75,
-              margin: const EdgeInsets.only(top: 20.0),
-              padding: const EdgeInsets.only(top: 15.0),
+              margin: const EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
                 color: Colors.green[50],
                 borderRadius: BorderRadius.circular(5),
@@ -80,14 +76,14 @@ void mostrarLoginAdmin(BuildContext context) {
                             return null;
                           },
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 20),
                         Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             // Boton Acceder y sus acciones
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  consultaUsuario(userController.text,
+                                  loginAPI(userController.text,
                                           passwordController.text)
                                       .then((respuesta) {
                                     if (respuesta.isEmpty) {
@@ -113,8 +109,7 @@ void mostrarLoginAdmin(BuildContext context) {
                                             DateFormat.yMd()
                                                 .format(DateTime.now()),
                                             "1");
-                                        InsertarUsuario()
-                                            .mostrarFormulario(context);
+                                        Navigator.pushNamed(context, '/admin');
                                       } else {
                                         nuevoAcceso(
                                             control.consulta![0].IDUSUARIO,

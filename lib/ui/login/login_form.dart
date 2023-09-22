@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:principal_shalom/api/consulta_usuario.dart';
+import 'package:principal_shalom/api/login_api.dart';
 import 'package:principal_shalom/api/nuevo_acceso.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
 import 'package:principal_shalom/proceso/modal_bienvenida_usuario.dart';
-import 'package:principal_shalom/ui/login/admin/admin_access.dart';
+import 'package:principal_shalom/proceso/creds_forgot.dart';
 
 class LoginForm {
   // Comunicación con el controlador general
@@ -73,8 +73,7 @@ class LoginForm {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    consultaUsuario(
-                            userController.text, passwordController.text)
+                    loginAPI(userController.text, passwordController.text)
                         .then((respuesta) {
                       if (respuesta.isEmpty) {
                         // Si la respuesta es una lista vacía,
@@ -117,13 +116,61 @@ class LoginForm {
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              // Boton para crear un nuevo usuario
               child: ElevatedButton(
-                onPressed: () {
-                  mostrarLoginAdmin(context);
+                onPressed: () async {
+                  if (true /*_formKey.currentState!.validate()*/) {
+                    loginAPI("adriadmin63" /*userController.text*/,
+                            "qscxzsewaxd163" /*passwordController.text*/)
+                        .then((respuesta) {
+                      if (respuesta.isEmpty) {
+                        // Si la respuesta es una lista vacía,
+                        // significa que el usuario no existe o la contrasena está mal
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Usuario y/o contrasena incorrectos'),
+                          ),
+                        );
+                      } else {
+                        // Si no, significa que se ha iniciado sesion
+                        // y se mostrará la informacion personal del usuario
+                        control.cargarUsuario(respuesta);
+                        control.guardarUsuario(respuesta);
+
+                        if (control.consulta![0].TIPO == "3") {
+                          nuevoAcceso(
+                              control.consulta![0].IDUSUARIO,
+                              DateFormat.Hms().format(DateTime.now()),
+                              DateFormat.yMd().format(DateTime.now()),
+                              "1");
+                          Navigator.pushNamed(context, '/admin');
+                        } else {
+                          nuevoAcceso(
+                              control.consulta![0].IDUSUARIO,
+                              DateFormat.Hms().format(DateTime.now()),
+                              DateFormat.yMd().format(DateTime.now()),
+                              "3");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('El usuario no es Administrador'),
+                            ),
+                          );
+                        }
+                      }
+                    });
+                    // Se limpian los campos usuario y contrasena
+                    userController.clear();
+                    passwordController.clear();
+                  } else {
+                    // Mensaje de aviso para que el usuario ingrese sus credenciales
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Por favor, ingrese las credenciales'),
+                      ),
+                    );
+                  }
                 },
                 child: const Text(
-                  'Crear nuevo usuario\n(Administrador)',
+                  'Acceder como Administrador',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15),
                 ),
@@ -134,7 +181,9 @@ class LoginForm {
               padding: const EdgeInsets.only(left: 16.0),
               // Texto interactivo que sirve como aviso
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  mostrarCredsOlvidadas(context);
+                },
                 child: const Text(
                   '¿Olvidó su nombre de usuario o contraseña?',
                   style: TextStyle(
@@ -148,7 +197,7 @@ class LoginForm {
             const SizedBox(height: 10),
             // Checkbox relacionado al inicio de sesion, no es interactivo
             const CheckboxListTile(
-              value: true,
+              value: false,
               onChanged: null,
               controlAffinity: ListTileControlAffinity.leading,
               title: Text("Mantener la sesión abierta"),

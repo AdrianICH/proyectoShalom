@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:principal_shalom/ui/admin/menu_admin.dart';
 import 'package:principal_shalom/ui/login/login_box.dart';
 
 class Login extends StatelessWidget {
@@ -12,6 +13,10 @@ class Login extends StatelessWidget {
       ),
       home: const MyLoginPage(title: 'Home Page Shalom'),
       debugShowCheckedModeBanner: false,
+      routes: {
+        '': (context) => Login(),
+        '/admin': (context) => AdminMenu(),
+      },
     );
   }
 }
