@@ -14,13 +14,6 @@ class _ListadoUsuariosState extends State<ListadoUsuarios> {
   // Controlador
   ControlUsuarios CC = Get.find();
 
-  /*void ConsultaUsuariosAPI(BuildContext context, String tipo) {
-    consultarUsuarios(tipo).then((respuesta) {
-      CC.cargarUsuario(respuesta);
-    });
-    build(context);
-  }*/
-
   @override
   Widget build(BuildContext context) {
     List tipo = ["Estudiante", "Profesor", "Administrador"];
@@ -38,11 +31,21 @@ class _ListadoUsuariosState extends State<ListadoUsuarios> {
                         return Card(
                           color: Colors.green[100],
                           child: ListTile(
-                              leading: Text(CC.datos![index].IDUSUARIO),
-                              trailing: Text(CC.datos![index].IDENTIFICACION),
-                              title: Text(CC.datos![index].NOMBRE),
+                              leading: Text(CC.datos![index].IDUSUARIO != null
+                                  ? CC.datos![index].IDUSUARIO
+                                  : ""),
+                              trailing: Text(
+                                  CC.datos![index].IDENTIFICACION != null
+                                      ? CC.datos![index].IDENTIFICACION
+                                      : ""),
+                              title: Text(CC.datos![index].NOMBRE != null
+                                  ? CC.datos![index].NOMBRE
+                                  : ""),
                               subtitle: Text(
-                                  "Tipo: ${tipo[int.parse(CC.datos![index].TIPO) - 1]}")),
+                                CC.datos![index].TIPO != null
+                                    ? "Tipo: ${tipo[int.parse(CC.datos![index].TIPO) - 1]}"
+                                    : "Tipo no disponible",
+                              )),
                         );
                       },
                     ),
