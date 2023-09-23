@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:principal_shalom/api/consultar_usuarios.dart';
 import 'package:principal_shalom/controllers/controlador_general.dart';
+import 'package:principal_shalom/proceso/listado_usuarios_eliminar.dart';
 import 'package:principal_shalom/proceso/listado_usuariosxtipo.dart';
 import 'package:principal_shalom/proceso/new_userPage.dart';
 
@@ -22,7 +23,8 @@ class _AdminMenuState extends State<AdminMenu> {
   // Lista de paginas
   final List<Widget> _pages = [
     Container(),
-    NewUserForm(), ListadoUsuarios() // Aquí debes definir tus páginas
+    NewUserForm(), ListadoUsuarios(),
+    ListadoUsuariosEliminar() // Aquí debes definir tus páginas
   ];
 
   @override
@@ -93,6 +95,18 @@ class _AdminMenuState extends State<AdminMenu> {
                     .then((respuesta) => control.guardarUsuario(respuesta));
                 setState(() {
                   _selectedIndex = 2; // o el índice de la página deseada
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.delete_forever),
+              title: Text('Eliminar Usuario'),
+              onTap: () {
+                consultarUsuarios("!=3")
+                    .then((respuesta) => control.guardarUsuario(respuesta));
+                setState(() {
+                  _selectedIndex = 3; // o el índice de la página deseada
                 });
                 Navigator.pop(context);
               },
