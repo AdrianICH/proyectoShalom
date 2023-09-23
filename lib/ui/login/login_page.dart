@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:principal_shalom/ui/acercade.dart';
 import 'package:principal_shalom/ui/admin/menu_admin.dart';
 import 'package:principal_shalom/ui/login/login_box.dart';
 
@@ -7,15 +8,16 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Principal Page Shalom',
+      title: 'Sistema Administrativo de Calificaciones Shalom',
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
       home: const MyLoginPage(title: 'Home Page Shalom'),
       debugShowCheckedModeBanner: false,
       routes: {
-        '': (context) => Login(),
+        '/login': (context) => Login(),
         '/admin': (context) => AdminMenu(),
+        '/about': (context) => AcercaDePage()
       },
     );
   }
@@ -33,9 +35,32 @@ class _MyLoginPageState extends State<MyLoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.menu),
         title: const Text("Menú"),
       ),
+      drawer: Drawer(
+          child: ListView(padding: EdgeInsets.zero, children: <Widget>[
+        DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Text('Bienvenido a Shalom',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ))),
+        ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Inicio'),
+            onTap: () {
+              Navigator.pop(context); // Cierra el Drawer
+            }),
+        ListTile(
+            leading: Icon(Icons.info_outline),
+            title: Text('Acerca de...'),
+            onTap: () {
+              Navigator.pushNamed(context, '/about');
+            })
+      ])),
       body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
