@@ -89,9 +89,10 @@ class _NewUserFormState extends State<NewUserForm> {
                         hintText: "example@email.com",
                         labelText: "Correo electronico"),
                     validator: (value) {
-                      if (value == null ||
-                          value.trim().isEmpty ||
-                          !value.contains("@")) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Ingrese un correo electronico';
+                      }
+                      if (!value.isEmail) {
                         return 'Ingrese un correo electronico valido';
                       }
                       if (RegExp(r'\s').hasMatch(value)) {
@@ -112,6 +113,9 @@ class _NewUserFormState extends State<NewUserForm> {
                       }
                       if (RegExp(r'\s').hasMatch(value)) {
                         return 'La contrasena no puede contener espacios';
+                      }
+                      if (value.length < 8) {
+                        return 'La contrasena debe tener 8 caracteres como mínimo';
                       }
                       return null;
                     },
