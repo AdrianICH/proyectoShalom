@@ -5,6 +5,7 @@ import 'package:principal_shalom/controllers/controlador_general.dart';
 
 class ListadoUsuarios extends StatefulWidget {
   const ListadoUsuarios({super.key});
+  final String title = "Listado de usuarios";
 
   @override
   State<ListadoUsuarios> createState() => _ListadoUsuariosState();
@@ -36,7 +37,7 @@ class _ListadoUsuariosState extends State<ListadoUsuarios> {
                                   : ""),
                               trailing: Text(
                                   CC.datos![index].IDENTIFICACION != null
-                                      ? CC.datos![index].IDENTIFICACION
+                                      ? "C.C ${CC.datos![index].IDENTIFICACION}"
                                       : ""),
                               title: Text(CC.datos![index].NOMBRE != null
                                   ? CC.datos![index].NOMBRE
