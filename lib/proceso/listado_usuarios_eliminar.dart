@@ -6,6 +6,7 @@ import 'package:principal_shalom/controllers/controlador_general.dart';
 
 class ListadoUsuariosEliminar extends StatefulWidget {
   const ListadoUsuariosEliminar({super.key});
+  final String title = "Eliminar Usuarios";
 
   @override
   State<ListadoUsuariosEliminar> createState() =>
@@ -131,7 +132,8 @@ class _ListadoUsuariosEliminarState extends State<ListadoUsuariosEliminar> {
                                 );
                               },
                               leading: Text(CC.datos![index].IDUSUARIO),
-                              trailing: Text(CC.datos![index].IDENTIFICACION),
+                              trailing: Text(
+                                  "C.C ${CC.datos![index].IDENTIFICACION}"),
                               title: Text(
                                   "${CC.datos![index].NOMBRE} (${CC.datos![index].USUARIO})"),
                               subtitle: Text(
