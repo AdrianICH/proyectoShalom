@@ -5,6 +5,7 @@ import 'package:principal_shalom/controllers/controlador_general.dart';
 
 class NewUserForm extends StatefulWidget {
   const NewUserForm({super.key});
+  final String title = "Agregar nuevo usuario";
 
   @override
   State<NewUserForm> createState() => _NewUserFormState();
