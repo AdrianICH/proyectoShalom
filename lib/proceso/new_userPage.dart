@@ -59,7 +59,7 @@ class _NewUserFormState extends State<NewUserForm> {
                     decoration: const InputDecoration(
                         hintText: "NOMBRE APELLIDO", labelText: "Nombre"),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null || value.trim().isEmpty) {
                         return 'Ingrese nombre y apellido';
                       }
                       return null;
@@ -74,6 +74,9 @@ class _NewUserFormState extends State<NewUserForm> {
                       if (value == null || value.isEmpty) {
                         return 'Ingrese nombre de usuario';
                       }
+                      if (RegExp(r'\s').hasMatch(value)) {
+                        return 'El nombre de usuario no puede contener espacios';
+                      }
                       return null;
                     },
                   ),
@@ -86,9 +89,12 @@ class _NewUserFormState extends State<NewUserForm> {
                         labelText: "Correo electronico"),
                     validator: (value) {
                       if (value == null ||
-                          value.isEmpty ||
+                          value.trim().isEmpty ||
                           !value.contains("@")) {
                         return 'Ingrese un correo electronico valido';
+                      }
+                      if (RegExp(r'\s').hasMatch(value)) {
+                        return 'El correo no puede contener espacios';
                       }
                       return null;
                     },
@@ -100,8 +106,11 @@ class _NewUserFormState extends State<NewUserForm> {
                     decoration: const InputDecoration(
                         hintText: "Contraseña", labelText: "Contrasena"),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null || value.trim().isEmpty) {
                         return 'Ingrese contrasena';
+                      }
+                      if (RegExp(r'\s').hasMatch(value)) {
+                        return 'La contrasena no puede contener espacios';
                       }
                       return null;
                     },
@@ -113,8 +122,11 @@ class _NewUserFormState extends State<NewUserForm> {
                     decoration: const InputDecoration(
                         hintText: "0 000 000 000", labelText: "CC"),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null || value.trim().isEmpty) {
                         return 'Ingrese cedula de ciudadania';
+                      }
+                      if (RegExp(r'\s').hasMatch(value)) {
+                        return 'La cédula no puede contener espacios';
                       }
                       return null;
                     },
@@ -125,8 +137,11 @@ class _NewUserFormState extends State<NewUserForm> {
                     decoration: const InputDecoration(
                         hintText: "Estudiante / Profesor", labelText: "Tipo"),
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null || value.trim().isEmpty) {
                         return 'Ingrese el tipo de usuario';
+                      }
+                      if (RegExp(r'\s').hasMatch(value)) {
+                        return 'El tipo de usuario no puede contener espacios';
                       }
                       return null;
                     },
