@@ -5,6 +5,7 @@ import 'package:principal_shalom/controllers/controlador_general.dart';
 import 'package:principal_shalom/proceso/listado_usuarios_eliminar.dart';
 import 'package:principal_shalom/proceso/listado_usuariosxtipo.dart';
 import 'package:principal_shalom/proceso/new_userPage.dart';
+import 'package:principal_shalom/ui/admin/principal_admin.dart';
 
 class AdminMenu extends StatefulWidget {
   const AdminMenu({super.key});
@@ -22,9 +23,16 @@ class _AdminMenuState extends State<AdminMenu> {
 
   // Lista de paginas
   final List<Widget> _pages = [
-    Container(),
+    PPageAdmins(),
     NewUserForm(), ListadoUsuarios(),
     ListadoUsuariosEliminar() // Aquí debes definir tus páginas
+  ];
+
+  // Lista de nombres de paginas
+  final List<String> _pageNames = [
+    PPageAdmins().title,
+    NewUserForm().title, ListadoUsuarios().title,
+    ListadoUsuariosEliminar().title // Aquí debes definir tus páginas
   ];
 
   @override
@@ -34,7 +42,7 @@ class _AdminMenuState extends State<AdminMenu> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-        "Bienvenido/a , ${control.consulta![0].NOMBRE} 👍!",
+        _pageNames[_selectedIndex],
         style: TextStyle(fontSize: 16),
       )),
       drawer: Drawer(
@@ -52,6 +60,16 @@ class _AdminMenuState extends State<AdminMenu> {
                   fontSize: 24,
                 ),
               ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Inicio'),
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 0; // o el índice de la página deseada
+                });
+                Navigator.pop(context); // Cierra el Drawer
+              },
             ),
             ListTile(
               leading: Icon(Icons.person_add),
