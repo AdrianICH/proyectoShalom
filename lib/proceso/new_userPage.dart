@@ -151,7 +151,7 @@ class _NewUserFormState extends State<NewUserForm> {
                       return null;
                     },
                   ),
-                  const Divider(),
+                  SizedBox(height: 20),
                   // Boton que envía los datos a la API y luego a la base de datos
                   ElevatedButton.icon(
                     onPressed: () async {
@@ -209,6 +209,7 @@ class _NewUserFormState extends State<NewUserForm> {
                     icon: const Icon(Icons.send),
                     label: const Text("Registrar"),
                   ),
+                  SizedBox(height: 20)
                 ]))
           ]),
         ),
