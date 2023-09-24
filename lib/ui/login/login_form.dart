@@ -118,9 +118,8 @@ class LoginForm {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: ElevatedButton(
                 onPressed: () async {
-                  if (true /*_formKey.currentState!.validate()*/) {
-                    loginAPI("adriadmin63" /*userController.text*/,
-                            "qscxzsewaxd163" /*passwordController.text*/)
+                  if (_formKey.currentState!.validate()) {
+                    loginAPI(userController.text, passwordController.text)
                         .then((respuesta) {
                       if (respuesta.isEmpty) {
                         // Si la respuesta es una lista vacía,
