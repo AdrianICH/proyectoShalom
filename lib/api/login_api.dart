@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:principal_shalom/api/insertar_persona.dart';
 
 Future<List<UserData>> loginAPI(String usr, String pssw) async {
-  var url = Uri.parse("http://localhost/shalom/api_consultaUser.php");
+  var url = Uri.parse("http://shalomaulas.eu5.org/my_apis/api_consultaUser.php");
   final response = await http.post(url, body: {"usuario": usr, "pssw": pssw});
 
   if (response.statusCode == 200) {

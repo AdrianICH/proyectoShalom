@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 Future<List<UserData>> insertarPersona(String usr, String email, String pssw,
     String name, String id, String tipo) async {
-  var url = Uri.parse("http://localhost/shalom/api_insertar.php");
+  var url = Uri.parse("http://shalomaulas.eu5.org/my_apis/api_insertar.php");
   final response = await http.post(url, body: {
     "usuario": usr,
     "correo": email,

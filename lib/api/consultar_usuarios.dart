@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:principal_shalom/api/insertar_persona.dart';
 
 Future<List<UserData>> consultarUsuarios(String tipo) async {
-  var url = Uri.parse("http://localhost/shalom/api_listarUsers.php");
+  var url = Uri.parse("http://shalomaulas.eu5.org/my_apis/api_listarUsers.php");
   final response = await http.post(url, body: {"tp": tipo});
 
   if (response.statusCode == 200) {

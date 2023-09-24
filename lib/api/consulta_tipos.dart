@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<UserTypes>> consultaTipos() async {
-  var url = Uri.parse("http://localhost/shalom/api_consultaTipos.php");
+  var url = Uri.parse("http://shalomaulas.eu5.org/my_apis/api_consultaTipos.php");
   final response = await http.post(url, body: {});
 
   if (response.statusCode == 200) {
